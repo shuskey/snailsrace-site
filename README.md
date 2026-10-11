@@ -27,6 +27,8 @@ Roll the color die, then click or tap the matching snail. Each move advances one
 
 Turn **Rules off** for free play. Use **Sound on/off** and **Volume** to control the original recordings. Audio initializes on the first gameplay interaction; no sound plays automatically on page load.
 
+On iPhone/iPad, audio requests the playback session where supported so Silent Mode does not suppress the voices. Touch release and keyboard gestures prime the audio context before asynchronous loading; later gestures also resume Safari's interrupted audio after switching apps or locking the device. Older browsers without the Audio Session API may still require Silent Mode to be turned off. Temporary sound-download failures retry on a later interaction.
+
 **Auto roll** rolls when a turn is ready, then waits for you to move the matching snail. **Auto move** moves the matching snail after you roll. Both are unchecked on load. Enable both for demo mode: rolls and moves alternate at 125 ms intervals, giving one move every quarter second. Automated play stops when all six snails finish; New Game starts another race with your selected settings. Unchecking a mode cancels any pending action for it.
 
 Keyboard: **Space** rolls, including when the die or a snail has focus; **1–6** move blue, pink, yellow, orange, green, and red respectively. **Tab** navigates controls and **Enter** activates a focused button. Other controls (rules, new game, sound, volume, and credits) retain their normal Space behavior. Movement respects reduced-motion preferences.

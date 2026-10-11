@@ -27,9 +27,20 @@ const audio = new GameAudio(() => {
     audioFailed = true;
     track('Audio failed');
     soundButton.textContent = 'Sound unavailable';
-    soundButton.title = 'Audio could not load. The game still works; reload to retry.';
+    soundButton.title = 'Audio could not load. Tap a game control to retry.';
   }
+}, () => {
+  if (!audioFailed) return;
+  audioFailed = false;
+  soundButton.textContent = audio.enabled ? 'Sound on' : 'Sound off';
+  soundButton.title = '';
 });
+// Capture the release gesture before click/change handlers or autoplay timers.
+// Repeat on later gestures so returning from an iOS audio interruption can recover.
+document.addEventListener('pointerup', () => { if (audio.enabled) void audio.unlock(); }, { capture: true });
+document.addEventListener('keydown', event => {
+  if (audio.enabled && !event.repeat && ['Space', 'Enter', '1', '2', '3', '4', '5', '6'].includes(event.code === 'Space' ? event.code : event.key)) void audio.unlock();
+}, { capture: true });
 const snails = colors.map((color, index) => {
   const lane = document.createElement('div');
   lane.className = `lane lane-${color}`;
