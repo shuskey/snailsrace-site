@@ -51,6 +51,10 @@ Changing styles updates the board, snails, die, header mascot, and automation ic
 
 **Neon** adds airbrushed cartoon snail sprites in six distinct colors, matching glowing color-dot dice, a dark luminous track, and decorative neon-tube snail lights. It uses the same game state and voices as the other styles. The PNG sprites were made with built-in image generation; assets and the final prompt set are in `public/assets/neon/ARTWORK.md`.
 
+## Link previews
+
+The initial HTML includes Open Graph and X large-image card metadata with the public production URL, title, description, and Neon title-screen artwork. Slack and other preview crawlers can read it without JavaScript or clicking PLAY. Platform caches and user/workspace preview settings determine when an updated card appears.
+
 ## Analytics
 
 Plausible runs only on `snails-race.chummy-bard-6128.chatgpt.site`; localhost, previews, and other hostnames do not load the tracking script or send events. The private Plausible dashboard receives standard traffic metrics and these fixed custom events, each at most once per page load:
