@@ -59,3 +59,5 @@ Plausible runs only on `snails-race.chummy-bard-6128.chatgpt.site`; localhost, p
 - Disabled rules, Muted sound, Audio failed.
 
 No player details, game state, audio content, or custom event properties are attached. Blocked analytics never interrupts gameplay. Matching Custom event goals in Plausible display feature conversions. Standard visit duration comes from Plausible; active interaction time is not implemented.
+
+First-place results use six additional events: **Blue first place**, **Pink first place**, **Yellow first place**, **Orange first place**, **Green first place**, and **Red first place**. Each fires when that snail is the first to finish a race, with rules on or off and in manual or automatic play. These count every race, including repeated wins after New Game without reloading. Use Plausible's **Total** column for win counts; **Uniques** counts distinct visitors who triggered each event.

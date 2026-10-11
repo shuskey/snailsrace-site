@@ -2,7 +2,7 @@ import './style.css';
 import { colors, createGame, FINISH, move, restart, roll } from './game';
 import { GameAudio } from './audio';
 import { AutoPlay } from './autoplay';
-import { track, type AnalyticsEvent } from './analytics';
+import { track, firstPlaceEvents, type AnalyticsEvent } from './analytics';
 const state = createGame();
 const get = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const board = get('board');
@@ -104,6 +104,7 @@ function moveSnail(index: number) {
   }
   track('Started playing');
   void audio.play(result === 'won' ? 'iwings' : `${colors[index]}g`);
+  if (result === 'won' && state.finishOrder.length === 1) track(firstPlaceEvents[colors[index]]);
   if (state.finishOrder.length === colors.length) {
     if (result === 'won') track('Finished race');
     render('Everyone made it! Start a new game to race again.');

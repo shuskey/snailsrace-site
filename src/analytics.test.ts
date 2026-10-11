@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createTracker, PRODUCTION_HOSTNAME, type AnalyticsEvent } from './analytics';
+import { createTracker, firstPlaceEvents, PRODUCTION_HOSTNAME, type AnalyticsEvent } from './analytics';
 
 test('localhost, previews, and the DynaDraw hostname never send game analytics', () => {
   for (const host of ['localhost', '127.0.0.1', 'preview.chatgpt.site', 'dynadraw-studio.chummy-bard-6128.chatgpt.site']) {
@@ -33,4 +33,20 @@ test('missing or failed analytics never block the game and do not mark an event 
   track('Finished race');
   track('Finished race');
   assert.deepEqual(calls, ['Finished race']);
+});
+
+test('all six first-place events count repeated races while feature events stay deduplicated', () => {
+  const calls: string[] = [];
+  const track = createTracker(() => PRODUCTION_HOSTNAME, () => event => calls.push(event));
+  for (let race = 0; race < 2; race++) {
+    for (const event of Object.values(firstPlaceEvents)) track(event);
+    track('Started playing');
+  }
+  for (const event of Object.values(firstPlaceEvents)) {
+    assert.equal(calls.filter(call => call === event).length, 2);
+  }
+  assert.equal(calls.filter(call => call === 'Started playing').length, 1);
+  const localTrack = createTracker(() => 'localhost', () => event => calls.push(event));
+  localTrack('Blue first place');
+  assert.equal(calls.length, 13);
 });
