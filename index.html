@@ -20,7 +20,13 @@
     </script>
   </head>
   <body>
-    <main class="game">
+    <section id="title-screen" class="title-screen" aria-label="Welcome to Snail’s Race">
+      <h1 class="visually-hidden">Snail’s Race — A little race. A lot of heart.</h1>
+      <button id="play" class="title-play" aria-label="PLAY Snail’s Race">
+        <img src="./assets/neon/title-screen.png" width="1672" height="941" alt="" fetchpriority="high" />
+      </button>
+    </section>
+    <main id="game" class="game" hidden>
       <header class="heading">
         <div><p class="eyebrow">A little race. A lot of heart.</p><h1>Snail’s Race<span class="title-dot">.</span></h1><p class="byline">By Scott Huskey <span>·</span> A family favorite since 1996</p></div>
         <div class="header-options">

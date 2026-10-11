@@ -13,6 +13,7 @@ const soundButton = get<HTMLButtonElement>('sound');
 const autoRoll = get<HTMLInputElement>('auto-roll');
 const autoMove = get<HTMLInputElement>('auto-move');
 const boardTheme = get<HTMLSelectElement>('board-theme');
+let hasStarted = false;
 const autoplay = new AutoPlay(() => state, () => ({ roll: autoRoll.checked, move: autoMove.checked }), rollDie, () => moveSnail(state.die));
 const capitalize = (word: string) => word[0].toUpperCase() + word.slice(1);
 const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}`;
@@ -41,6 +42,14 @@ document.addEventListener('pointerup', () => { if (audio.enabled) void audio.unl
 document.addEventListener('keydown', event => {
   if (audio.enabled && !event.repeat && ['Space', 'Enter', '1', '2', '3', '4', '5', '6'].includes(event.code === 'Space' ? event.code : event.key)) void audio.unlock();
 }, { capture: true });
+get('play').addEventListener('click', () => {
+  if (hasStarted) return;
+  hasStarted = true;
+  void audio.unlock();
+  get('title-screen').hidden = true;
+  get('game').hidden = false;
+  rollButton.focus({ preventScroll: true });
+});
 const snails = colors.map((color, index) => {
   const lane = document.createElement('div');
   lane.className = `lane lane-${color}`;
@@ -97,6 +106,7 @@ boardTheme.addEventListener('change', () => {
   track(events[boardTheme.value]);
 });
 function rollDie() {
+  if (!hasStarted) return;
   if (roll(state)) {
     track('Started playing');
     void audio.play(`${colors[state.die]}o`);
@@ -107,6 +117,7 @@ function rollDie() {
   }
 }
 function moveSnail(index: number) {
+  if (!hasStarted) return;
   const result = move(state, index);
   if (result === 'blocked') {
     void audio.play('beboop');
@@ -160,6 +171,7 @@ get<HTMLInputElement>('volume').addEventListener('input', event => {
   audio.setVolume(Number((event.target as HTMLInputElement).value) / 100);
 });
 document.addEventListener('keydown', event => {
+  if (!hasStarted) return;
   const target = event.target as HTMLElement;
   if (event.repeat || event.altKey || event.ctrlKey || event.metaKey || target.matches('input, textarea, select, [contenteditable="true"]')) return;
   // Keep Space available after a snail click, which leaves that button focused.

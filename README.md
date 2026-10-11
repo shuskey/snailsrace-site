@@ -23,6 +23,8 @@ The production site is written to `dist/`, ready for static hosting. For hosting
 
 ## Play
 
+Every page load opens the Neon title artwork. Click or tap **PLAY** (or anywhere on the artwork), or focus it and press Enter/Space, to reveal the game. The game and its keyboard shortcuts are inactive until this step. The Play gesture also prepares audio. New Game resets the race without returning to the title screen; refreshing shows the title again.
+
 Roll the color die, then click or tap the matching snail. Each move advances one of nine steps to the finish. All six snails can finish, with finish order shown on the board. Clicking an already finished matching snail completes the turn without moving it again. New Game resets the board and retains the current rules and sound settings.
 
 Turn **Rules off** for free play. Use **Sound on/off** and **Volume** to control the original recordings. Audio initializes on the first gameplay interaction; no sound plays automatically on page load.
