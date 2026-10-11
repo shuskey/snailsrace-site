@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-board-theme="neon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#100c22" />
+    <meta name="description" content="Roll a color, move a snail. Scott Huskey’s original family game, with its original artwork and voices." />
+    <title>Snail’s Race · Scott Huskey</title>
+    <!-- Privacy-friendly analytics: production only, matching DynaDraw's setup. -->
+    <script>
+      if (location.hostname === 'snails-race.chummy-bard-6128.chatgpt.site') {
+        window.plausible = window.plausible || function () { (plausible.q = plausible.q || []).push(arguments); };
+        plausible.init = plausible.init || function (options) { plausible.o = options || {}; };
+        plausible.init();
+        const analytics = document.createElement('script');
+        analytics.async = true;
+        analytics.src = 'https://plausible.io/js/pa-WzEcCAeH1ExKnD0X9PgNh.js';
+        document.head.appendChild(analytics);
+      }
+    </script>
+  </head>
+  <body>
+    <main class="game">
+      <header class="heading">
+        <div><p class="eyebrow">A little race. A lot of heart.</p><h1>Snail’s Race<span class="title-dot">.</span></h1><p class="byline">By Scott Huskey <span>·</span> A family favorite since 1996</p></div>
+        <div class="header-options">
+          <img id="mascot" class="mascot" src="./assets/neon/greensnail.png" width="64" height="64" alt="" />
+          <label class="theme-picker" for="board-theme">Board style
+            <select id="board-theme"><option value="classic">Classic</option><option value="original">Original</option><option value="neon" selected>Neon</option></select>
+          </label>
+        </div>
+      </header>
+      <section class="play-area" aria-label="Snail racing game">
+        <div class="toolbar">
+          <button id="roll" class="roll"><img id="die" src="./assets/neon/bluedice.svg" width="32" height="32" alt="Blue" /><span>Roll the die</span><span class="key-hint">Space</span></button>
+          <div class="auto-controls" role="group" aria-label="Automatic play">
+            <label><input id="auto-roll" type="checkbox" /><img id="auto-roll-icon" src="./assets/neon/bluedice.svg" width="16" height="16" alt="" />Auto roll</label>
+            <label><input id="auto-move" type="checkbox" /><img id="auto-move-icon" src="./assets/neon/greensnail.png" width="20" height="20" alt="" />Auto move</label>
+          </div>
+          <div class="toolbar-options">
+            <button id="rules" class="tool-button" aria-pressed="true"><img id="rules-icon" src="./assets/ruleson.gif" width="24" height="24" alt="" /><span>Rules on</span></button>
+            <button id="restart" class="tool-button"><span aria-hidden="true">↻</span> New game</button>
+          </div>
+        </div>
+        <div class="race-caption" aria-hidden="true"><span>START</span><span>NINE LITTLE STEPS TO VICTORY <span class="caption-arrow">→</span></span><span>FINISH</span></div>
+        <div id="board" class="board" aria-label="Six snails racing toward the finish"></div>
+        <div class="status-bar"><span class="status-light" aria-hidden="true"></span><p id="status" role="status" aria-live="polite" aria-atomic="true">Roll the die to start the race.</p><span id="finish-count">0 / 6 home</span></div>
+      </section>
+      <section class="below-board" aria-label="Game instructions and sound">
+        <p><strong>How to play</strong> Roll a color, then tap that snail to move it one square. Every snail gets to finish.</p>
+        <div class="sound-controls"><button id="sound" class="sound-button" aria-pressed="true">Sound on</button><label for="volume">Volume</label><input id="volume" type="range" min="0" max="100" value="80" /></div>
+      </section>
+      <details class="about"><summary>The voices behind the race</summary><p>Snails: Grace, age 4. Die: Olivia, age 3. Referee: Scott. The original artwork and recordings are preserved from the Java game.</p><p>Turn rules off for free play: roll or move any snail whenever you like. With rules on, roll first and move the matching snail. If that snail has finished, tap it to complete the turn.</p><p>Originally written in C, then C++, and ported to Java in 1996. Based on Ravensburger’s <em>Snail’s Pace Race</em> board game.</p></details>
+      <footer>Made for the joy of playing together.<span>© 1996–2026 Huskey-Doodles, Inc.</span></footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
